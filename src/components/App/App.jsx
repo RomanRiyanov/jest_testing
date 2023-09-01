@@ -7,6 +7,12 @@ const data = ['Mercedes', 'Alfa Romeo', 'Zhiguli', 'Volvo', 'Corvette', 'Great W
 
 function App() {
   const [search, setSearch] = useState('');
+  const [items, setItems] = useState(data);
+
+  useEffect(() => {
+    setItems(data.filter(item => item.toLocaleLowerCase().includes(search.toLocaleLowerCase())));
+    if (!search) setItems(data);
+  }, [search])
 
   return (
     <div className="App">
@@ -14,7 +20,7 @@ function App() {
         <Search value={search} onChange={(e) => {setSearch(e.target.value)}}>
           Find zhoolik:
         </Search>
-        <List items={data}/>
+        <List items={items}/>
       </div>
     </div>
   );
